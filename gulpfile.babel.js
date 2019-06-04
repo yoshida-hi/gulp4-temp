@@ -39,6 +39,7 @@ import rename       from 'gulp-rename'
 
 // -- gulp other packages
 import plumber from 'gulp-plumber'
+import rimraf  from 'rimraf'
 
 
 
@@ -92,8 +93,4 @@ const css = () => {
 // *************** //
 // gulp build task //
 // *************** //
-gulp.task( 'build:html', gulp.series(html) )
-
-gulp.task( 'build:css', gulp.series(css) )
-
 gulp.task( 'build', gulp.series(html,css) )
