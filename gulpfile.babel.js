@@ -34,7 +34,6 @@ import autoprefixer from 'gulp-autoprefixer'
 import sass         from 'gulp-sass'
 import sourcemaps   from 'gulp-sourcemaps'
 import cleanCSS     from 'gulp-clean-css'
-import rename       from 'gulp-rename'
 
 
 // -- gulp other packages
@@ -78,9 +77,6 @@ const css = () => {
     }) )
     .pipe(sass({outputStyle: 'expanded'}))
     .pipe(cleanCSS())
-    .pipe(rename({
-        extname: '.min.css'
-    }))
     .pipe(sourcemaps.write())
     .pipe(autoprefixer({
         overrideBrowserslist: ['last 3 versions'],

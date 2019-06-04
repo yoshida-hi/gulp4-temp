@@ -6,8 +6,9 @@
   "author": "MAKIZAWA Chihiro <makizawa@gnavi.co.jp>",
   "license": "MIT",
   "scripts": {
-    "clean": "rimraf ./public & gulp build",
-    "build": "yarn clean & gulp build"
+    "build": "gulp build",
+    "clean": "rimraf ./public",
+    "dev": "yarn clean && gulp build"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -18,7 +19,6 @@
     "gulp-clean-css": "^4.2.0",
     "gulp-plumber": "^1.2.1",
     "gulp-pug": "^4.0.1",
-    "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
     "rimraf": "^2.6.3"

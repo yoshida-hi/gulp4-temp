@@ -10,6 +10,13 @@ $ cd pay_pfr
 $ yarn
 ```
 
+### Development
+
+```
+$ yarn dev
+```
+（Clean & Build）
+
 ### Build
 
 ```
