@@ -6,14 +6,21 @@
   "author": "MAKIZAWA Chihiro <makizawa@gnavi.co.jp>",
   "license": "MIT",
   "scripts": {
-    "build:html": "gulp build:html"
+    "build": "gulp build",
+    "build:html": "gulp build:html",
+    "build:css": "gulp build:css"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "@babel/register": "^7.4.4",
     "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-clean-css": "^4.2.0",
     "gulp-plumber": "^1.2.1",
-    "gulp-pug": "^4.0.1"
+    "gulp-pug": "^4.0.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5"
   }
 }

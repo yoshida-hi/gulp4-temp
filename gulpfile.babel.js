@@ -29,6 +29,14 @@ import fs from 'fs'
 // -- gulp html packages
 import pug from 'gulp-pug'
 
+// -- gulp sass packages
+import autoprefixer from 'gulp-autoprefixer'
+import sass         from 'gulp-sass'
+import sourcemaps   from 'gulp-sourcemaps'
+import cleanCSS     from 'gulp-clean-css'
+import rename       from 'gulp-rename'
+
+
 // -- gulp other packages
 import plumber from 'gulp-plumber'
 
@@ -58,7 +66,34 @@ const html = () => {
     .pipe( gulp.dest(path.dist.html) )
 }
 
+// -- build css task
+const css = () => {
+  return gulp.src( [path.src.css + '**.scss', path.src.css + '!**/[^_]*.scss'], { since: gulp.lastRun(css) } )
+    .pipe( plumber({
+      errorHandler: function(err) {
+        console.log(err.messageFormatted);
+        this.emit('end');
+      }
+    }) )
+    .pipe(sass({outputStyle: 'expanded'}))
+    .pipe(cleanCSS())
+    .pipe(rename({
+        extname: '.min.css'
+    }))
+    .pipe(sourcemaps.write())
+    .pipe(autoprefixer({
+        overrideBrowserslist: ['last 3 versions'],
+        cascade: false
+      }))
+    .pipe( gulp.dest(path.dist.css) )
+}
+
+
 // *************** //
 // gulp build task //
 // *************** //
 gulp.task( 'build:html', gulp.series(html) )
+
+gulp.task( 'build:css', gulp.series(css) )
+
+gulp.task( 'build', gulp.series(html,css) )

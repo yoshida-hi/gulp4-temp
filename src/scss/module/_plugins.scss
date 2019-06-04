@@ -1,0 +1,10 @@
+@charset "utf-8";
+
+.hoge {
+  display: block;
+
+  &__fuga {
+    overflow: hidden;
+    transition: background-color 1s linear 0 , width 1s linear 0 , height 1s linear 0;
+  }
+}
