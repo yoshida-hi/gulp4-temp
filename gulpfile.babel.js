@@ -40,11 +40,9 @@ import uglify from 'gulp-uglify'
 import concat from 'gulp-concat'
 
 // -- gulp other packages
-import plumber from 'gulp-plumber'
-import rimraf  from 'rimraf'
-
-
-
+import plumber     from 'gulp-plumber'
+import rimraf      from 'rimraf'
+import browserSync from 'browser-sync'
 
 // **************** //
 // gulp single task //
@@ -109,7 +107,6 @@ const js = () => {
     .pipe( gulp.dest(path.dist.script) )
 }
 
-
 // -- build copy task
 const copy = () => {
   return gulp.src( [path.src.script + 'lib/[^_]*.js'], { since: gulp.lastRun(copy) } )
@@ -122,8 +119,35 @@ const copy = () => {
     .pipe( gulp.dest(path.dist.script + 'lib/') )
 }
 
+// -- build server task
+const server = done => {
+  return browserSync.init({
+    open: 'external',
+    server: {
+      baseDir: path.dist.html,
+      index  : 'list.html'
+    }
+  })
+  done();
+}
+
+const reload = done => {
+  browserSync.reload();
+  done();
+}
+
+// -- build watch task
+const watch = done => {
+  gulp.watch([path.src.html + '**.pug', path.src.html + '**/*.pug'], gulp.parallel(html,reload));
+  gulp.watch([path.src.css + '**.scss', path.src.css + '**/*.scss'], gulp.parallel(css,reload));
+  gulp.watch([path.src.script + '**.js', path.src.script + 'common/*.js'], gulp.parallel(js,reload));
+  done();
+}
+
 
 // *************** //
 // gulp build task //
 // *************** //
 gulp.task( 'build', gulp.series(html,css,js,copy) )
+
+gulp.task( 'watch', gulp.parallel(server,watch,html,css,js) )

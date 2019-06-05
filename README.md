@@ -21,7 +21,7 @@ v10.15.1
 ```
 $ yarn dev
 ```
-（Clean & Build）
+（Clean & Build & watch）
 
 ### Build
 

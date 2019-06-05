@@ -1,4 +1,4 @@
-extends ../layout/_default
+extends layout/_default
 block var
   - metas = {}
   - metas.title = 'title'
@@ -11,4 +11,10 @@ block append meta
 block title
   title gulp v4 temp
 block body
-  p Gulp v4 welcome
+  h1 サイトリスト
+
+  ul
+    li
+      a(href="/" target="blank") トップページ : index.thml
+    li
+      a(href="/pages/index.html" target="blank") 下層： /pages/index.html
