@@ -1,0 +1,20 @@
+extends layout/_default
+block var
+  - metas = {}
+  - metas.title = 'title'
+  - metas.url = 'url'
+  - metas.image = 'image'
+  - metas.site_name = 'site_name'
+  - metas.description = 'description'
+block append meta
+  +meta(metas)
+block title
+  title gulp v4 temp
+block body
+  h1 サイトリスト
+
+  ul
+    li
+      a(href="/" target="blank") トップページ : index.thml
+    li
+      a(href="/pages/index.html" target="blank") 下層： /pages/index.html
