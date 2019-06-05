@@ -10,6 +10,12 @@ $ cd pay_pfr
 $ yarn
 ```
 
+### node-version
+
+```
+v10.15.1
+```
+
 ### Development
 
 ```

@@ -35,6 +35,9 @@ import sass         from 'gulp-sass'
 import sourcemaps   from 'gulp-sourcemaps'
 import cleanCSS     from 'gulp-clean-css'
 
+// -- gulp js packages
+import uglify from 'gulp-uglify'
+import concat from 'gulp-concat'
 
 // -- gulp other packages
 import plumber from 'gulp-plumber'
@@ -68,7 +71,7 @@ const html = () => {
 
 // -- build css task
 const css = () => {
-  return gulp.src( [path.src.css + '**.scss', path.src.css + '!**/[^_]*.scss'], { since: gulp.lastRun(css) } )
+  return gulp.src( [path.src.css + '**.scss', path.src.css + '**/[^_]*.scss'], { since: gulp.lastRun(css) } )
     .pipe( plumber({
       errorHandler: function(err) {
         console.log(err.messageFormatted);
@@ -85,8 +88,42 @@ const css = () => {
     .pipe( gulp.dest(path.dist.css) )
 }
 
+// -- build js task
+const js = () => {
+  return gulp.src( [path.src.script + '**.js', path.src.script + 'common/[^_]*.js'], { since: gulp.lastRun(js) } )
+    .pipe( plumber({
+      errorHandler: function(err) {
+        console.log(err.messageFormatted);
+        this.emit('end');
+      }
+    }) )
+    .pipe(uglify())
+    .pipe(concat('all.js'))
+    .pipe(uglify({
+        compress: true,
+        mangle: true,
+        output:{
+          comments: /^!/
+        }
+      }))
+    .pipe( gulp.dest(path.dist.script) )
+}
+
+
+// -- build copy task
+const copy = () => {
+  return gulp.src( [path.src.script + 'lib/[^_]*.js'], { since: gulp.lastRun(copy) } )
+    .pipe( plumber({
+      errorHandler: function(err) {
+        console.log(err.messageFormatted);
+        this.emit('end');
+      }
+    }) )
+    .pipe( gulp.dest(path.dist.script + 'lib/') )
+}
+
 
 // *************** //
 // gulp build task //
 // *************** //
-gulp.task( 'build', gulp.series(html,css) )
+gulp.task( 'build', gulp.series(html,css,js,copy) )
