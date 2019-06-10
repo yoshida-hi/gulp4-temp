@@ -6,7 +6,7 @@
 
 ```
 $ git clone https://github.com/yoshida-hi/gulp4-temp.git
-$ cd pay_pfr
+$ cd gulp4-temp
 $ yarn
 ```
 
@@ -28,6 +28,7 @@ $ yarn dev
 ```
 $ yarn build
 ```
+（html & js & css & img）
 
 ### Clean
 
