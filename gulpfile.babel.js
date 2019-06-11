@@ -38,6 +38,7 @@ import cleanCSS     from 'gulp-clean-css'
 // -- gulp js packages
 import uglify from 'gulp-uglify'
 import concat from 'gulp-concat'
+import babel  from 'gulp-babel' 
 
 // -- gulp images packages
 import imagemin    from 'gulp-imagemin'
@@ -50,6 +51,7 @@ import plumber     from 'gulp-plumber'
 import rimraf      from 'rimraf'
 import changed     from 'gulp-changed'
 import browserSync from 'browser-sync'
+import gulpEslint  from 'gulp-eslint'
 
 // **************** //
 // gulp single task //
@@ -95,14 +97,14 @@ const css = () => {
 
 // -- build js task
 const js = () => {
-  return gulp.src( [path.src.script + '**.js', path.src.script + 'common/[^_]*.js'], { since: gulp.lastRun(js) } )
+  return gulp.src( [path.src.script + '**/**.js',path.src.script + 'common/[^_]*.js'], { since: gulp.lastRun(js) } )
     .pipe( plumber({
       errorHandler: function(err) {
         console.log(err.messageFormatted)
         this.emit('end')
       }
     }) )
-    .pipe(uglify())
+    .pipe(babel())
     .pipe(concat('all.js'))
     .pipe(uglify({
         compress: true,
@@ -112,6 +114,20 @@ const js = () => {
         }
       }))
     .pipe( gulp.dest(path.dist.script) )
+}
+
+// -- build eslint task
+const eslint = () => {
+  return gulp.src( [path.src.script + '**.js', path.src.script + 'common/[^_]*.js'], { since: gulp.lastRun(eslint) } )
+    .pipe( plumber({
+      errorHandler: function(err) {
+        console.log(err.messageFormatted)
+        this.emit('end')
+      }
+    }) )
+    .pipe(gulpEslint())
+    .pipe(gulpEslint.format())
+    .pipe(gulpEslint.failOnError())
 }
 
 // -- build images task
@@ -189,6 +205,8 @@ gulp.task( 'build:css', gulp.series(css) )
 gulp.task( 'build:js', gulp.series(js) )
 
 gulp.task( 'build:img', gulp.series(img) )
+
+gulp.task( 'eslint', gulp.series(eslint) )
 
 gulp.task( 'copy', gulp.series(copy) )
 
