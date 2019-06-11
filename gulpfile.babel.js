@@ -189,7 +189,7 @@ const reload = done => {
 const watch = done => {
   gulp.watch([path.src.html + '**.pug', path.src.html + '**/*.pug'], gulp.parallel(html,reload))
   gulp.watch([path.src.css + '**.scss', path.src.css + '**/*.scss'], gulp.parallel(css,reload))
-  gulp.watch([path.src.script + '**.js', path.src.script + 'common/*.js'], gulp.parallel(js,reload))
+  gulp.watch([path.src.script + '**.js', path.src.script + 'common/*.js'], gulp.parallel(eslint,js,reload))
   gulp.watch([path.src.images + '**.+(jpg|jpeg|png|gif)', path.src.images + '**/[^_]*.+(jpg|jpeg|png|gif)'], gulp.parallel(img,reload))
   done()
 }
