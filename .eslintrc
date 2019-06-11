@@ -1,0 +1,8 @@
+{
+  "extends": ["eslint-config-gnavi"],
+  "env": {
+    "jquery": true
+  },
+  "rules": {
+  }
+}
