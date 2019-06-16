@@ -42,7 +42,8 @@ import babel  from 'gulp-babel'
 
 // -- gulp images packages
 import imagemin    from 'gulp-imagemin'
-import imageminJpg from 'imagemin-jpegtran'
+import mozjpeg     from 'imagemin-mozjpeg'
+import pngquant    from 'imagemin-pngquant'
 import imageminPng from 'imagemin-optipng'
 import imageminGif from 'imagemin-gifsicle'
 
@@ -141,10 +142,10 @@ const img = () => {
     }) )
     .pipe(changed(path.dist.images))
     .pipe(imagemin([
-      imageminJpg({
-        quality: 80,
-        progressive: true
+      mozjpeg({
+        quality: 80
       }),
+      pngquant(),
       imageminPng(),
       imageminGif({
         interlaced: false,
