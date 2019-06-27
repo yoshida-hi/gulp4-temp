@@ -1,9 +1,9 @@
 {
-  "name": "gulp4-temp",
+  "name": "gnavi-gulp_v4-boiler-pug-babel",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/yoshida-hi/gulp4-temp.git",
-  "author": "MAKIZAWA Chihiro <yoshida-hiro@gnavi.co.jp>",
+  "repository": "https://github.com/gurunavi-creators/gnavi-gulp_v4-boiler-pug-babel.git",
+  "author": "Hiroyuki Yoshida <yoshida-hiro@gnavi.co.jp>",
   "license": "MIT",
   "scripts": {
     "build:html": "gulp build:html",

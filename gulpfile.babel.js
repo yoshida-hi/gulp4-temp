@@ -38,7 +38,7 @@ import cleanCSS     from 'gulp-clean-css'
 // -- gulp js packages
 import uglify from 'gulp-uglify'
 import concat from 'gulp-concat'
-import babel  from 'gulp-babel' 
+import babel  from 'gulp-babel'
 
 // -- gulp images packages
 import imagemin    from 'gulp-imagemin'
